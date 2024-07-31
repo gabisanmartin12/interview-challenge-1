@@ -1,5 +1,5 @@
 import { mapApiCharacterToCharacter } from "@/adapters/IceAndFire";
-import { Character } from "@/types/IceAndFire";
+import type { Character } from "@/types/IceAndFire";
 import type { Axios } from "axios";
 
 export default class IceAndFireCharactersService {
@@ -9,10 +9,9 @@ export default class IceAndFireCharactersService {
     this.caller = caller;
   }
 
-  async getCharacterById(id: Character["id"]): Promise<Character> {
-    return this.caller
+  getCharacterById = (id: Character["id"]): Promise<Character> =>
+    this.caller
       .get(`/api/characters/${id}`)
       .then((res) => res.data)
       .then(mapApiCharacterToCharacter);
-  }
 }
