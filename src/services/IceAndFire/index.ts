@@ -6,7 +6,11 @@ export default class IceAndFireService {
   houses: IceAndFireHousesService;
 
   constructor(baseURL: string) {
-    this.caller = new Axios({ baseURL });
+    this.caller = new Axios({
+      baseURL,
+      transformResponse: (data: string) => JSON.parse(data),
+    });
+
     this.houses = new IceAndFireHousesService(this.caller);
   }
 }

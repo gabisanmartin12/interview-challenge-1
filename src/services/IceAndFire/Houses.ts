@@ -1,3 +1,5 @@
+import { mapApiHousesToHouses } from "@/adapters/IceAndFire";
+import type { House } from "@/types/IceAndFire";
 import { Axios } from "axios";
 
 export default class IceAndFireHousesService {
@@ -7,7 +9,10 @@ export default class IceAndFireHousesService {
     this.caller = caller;
   }
 
-  async getHouses() {
-    return this.caller.get("/api/houses").then((res) => res.data);
+  async getHouses(): Promise<House[]> {
+    return this.caller
+      .get("/api/houses")
+      .then((res) => res.data)
+      .then(mapApiHousesToHouses);
   }
 }
