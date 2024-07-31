@@ -1,3 +1,4 @@
+import SwornMemberList from "@/components/SwornMemberList";
 import { useHouses } from "@/hooks/IceAndFire";
 
 const HouseList = () => {
@@ -12,13 +13,7 @@ const HouseList = () => {
       {houses.map((house) => (
         <article key={house.id} aria-labelledby="houseName">
           <h2 id="houseName">{house.name}</h2>
-
-          {/** TODO: Draw Sworn Memebers list */}
-          {house.swornMembersIds.length === 0 ? (
-            <p>This house has no sworn members</p>
-          ) : (
-            <section>Sworn list</section>
-          )}
+          <SwornMemberList membersIds={house.swornMembersIds} />
         </article>
       ))}
     </section>
