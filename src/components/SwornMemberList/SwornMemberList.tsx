@@ -1,4 +1,5 @@
 import { Character } from "@/types/IceAndFire";
+import SwornMemberCard from "@/components/SwornMemberCard";
 
 interface SwornMemberListProps {
   membersIds: Character["id"][];
@@ -12,7 +13,7 @@ const SwornMemberList = ({ membersIds }: SwornMemberListProps) => {
   return (
     <section>
       {membersIds.map((id) => (
-        <article key={id}>{id}</article>
+        <SwornMemberCard key={id} memberId={id} />
       ))}
     </section>
   );
