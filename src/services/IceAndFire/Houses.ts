@@ -9,10 +9,9 @@ export default class IceAndFireHousesService {
     this.caller = caller;
   }
 
-  async getHouses(): Promise<House[]> {
-    return this.caller
+  getHouses = (): Promise<House[]> =>
+    this.caller
       .get("/api/houses")
       .then((res) => res.data)
       .then(mapApiHousesToHouses);
-  }
 }
