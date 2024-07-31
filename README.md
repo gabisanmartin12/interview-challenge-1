@@ -9,7 +9,7 @@ In order to successfully run this proyect, you must:
 3. Copy this into the `.env` file.
 
 ```env
-
+    VITE_API_URL="https://anapioficeandfire.com"
 ```
 
 4. Run `npm run dev`
