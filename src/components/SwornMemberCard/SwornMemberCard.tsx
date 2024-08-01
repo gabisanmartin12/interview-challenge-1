@@ -24,7 +24,7 @@ const SwordMemberCard = ({ memberId }: SwordMemberCardProps) => {
       className={`py-2 px-4 border-l-4 ${borderClass}`}
     >
       <header className="flex gap-2 items-center">
-        <h3 className="text-2xl" id="memberName">
+        <h3 className="text-base sm:text-lg" id="memberName">
           {member.name}
         </h3>
         <span
