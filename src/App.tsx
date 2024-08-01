@@ -11,6 +11,16 @@ function App() {
         <h1 className="text-3xl lg:text-4xl mb-8">Ice & fire</h1>
         <HouseList />
       </main>
+      <footer className="sticky bottom-0 text-right text-white/60 italic p-4">
+        by{" "}
+        <a
+          href="https://linkedin.com/in/gasanmartin"
+          target="_blank"
+          className="font-bold"
+        >
+          Gabriel San Martin
+        </a>
+      </footer>
     </QueryClientProvider>
   );
 }
