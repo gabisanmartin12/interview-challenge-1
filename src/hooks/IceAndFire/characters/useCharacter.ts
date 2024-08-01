@@ -1,13 +1,9 @@
 import CHARACTERS_KEYS from "@/hooks/IceAndFire/characters/keys";
-import services from "@/services";
+import { getCharacterById } from "@/services/IceAndFire";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
-type Input = Parameters<
-  typeof services.iceAndFire.characters.getCharacterById
->[0];
-type Output = Awaited<
-  ReturnType<typeof services.iceAndFire.characters.getCharacterById>
->;
+type Input = Parameters<typeof getCharacterById>[0];
+type Output = Awaited<ReturnType<typeof getCharacterById>>;
 
 export const useCharacter = <T = Output>(
   id: Input,
@@ -15,6 +11,6 @@ export const useCharacter = <T = Output>(
 ) =>
   useQuery<Output, Error, T>({
     ...options,
-    queryFn: () => services.iceAndFire.characters.getCharacterById(id),
+    queryFn: () => getCharacterById(id),
     queryKey: CHARACTERS_KEYS.detail(id),
   });
