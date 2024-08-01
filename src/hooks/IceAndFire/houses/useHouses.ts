@@ -1,14 +1,16 @@
 import { getHouses } from "@/services/IceAndFire";
 import HOUSES_KEYS from "./keys";
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-type Output = Awaited<ReturnType<typeof getHouses>>;
+type Input = Parameters<typeof getHouses>[0];
 
-export const useHouses = <T = Output>(
-  options: Omit<UseQueryOptions<Output, Error, T>, "queryKey" | "queryFn"> = {}
-) =>
-  useQuery<Output, Error, T>({
-    ...options,
-    queryFn: getHouses,
+export const useHouses = ({ page = 1, pageSize = 10 }: Partial<Input> = {}) =>
+  useInfiniteQuery({
+    initialPageParam: page,
+    queryFn: ({ pageParam }) => getHouses({ page: pageParam, pageSize }),
     queryKey: HOUSES_KEYS.all,
+    getNextPageParam: (lastPage, _, lastPageParam) => {
+      if (lastPage.length % pageSize === 0) return lastPageParam + 1;
+    },
+    select: ({ pages }) => pages.flatMap((page) => page),
   });

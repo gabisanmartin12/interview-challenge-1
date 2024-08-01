@@ -2,7 +2,14 @@ import SwornMemberList from "@/components/SwornMemberList";
 import { useHouses } from "@/hooks/IceAndFire";
 
 const HouseList = () => {
-  const { data: houses, isLoading, isSuccess } = useHouses();
+  const {
+    data: houses,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isSuccess,
+    fetchNextPage,
+  } = useHouses();
 
   if (isLoading)
     return <p className="text-white/60 text-lg">Loading houses ...</p>;
@@ -13,6 +20,8 @@ const HouseList = () => {
         Something went wrong
       </div>
     );
+
+  const handleLoadMoreClick = () => fetchNextPage();
 
   return (
     <section aria-label="Houses' List" className="flex flex-col gap-4">
@@ -35,6 +44,14 @@ const HouseList = () => {
           />
         </article>
       ))}
+
+      {isFetchingNextPage && (
+        <p className="text-white/60 text-lg text-center">
+          Loading more houses ...
+        </p>
+      )}
+
+      {hasNextPage && <button onClick={handleLoadMoreClick}>Load more</button>}
     </section>
   );
 };
